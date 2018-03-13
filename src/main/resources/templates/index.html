@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>eIDAS Client Webapp</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script src="js/bootstrap.min.js"/>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1 th:fragment="header"><img sec:authorize="!isAuthenticated()" src="img/locked.png" height="30" width="30"/><img sec:authorize="isAuthenticated()" src="img/unlocked.png" height="25" width="25"/><a href="/"> Sample eIDAS Client</a></h1>
+    </div>
+    <div class="alert alert-success logout" role="alert" th:fragment="logout" sec:authorize="isAuthenticated()">
+        Logged in user:<strong><span sec:authentication="name"></span></strong><form action="#" th:action="@{/logout}" method="post"><input type="submit" value="Logout" /></form>
+    </div>
+    <div>
+        <ul>
+            <li>Go to the <a href="/protected" th:href="@{/protected}">protected page</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

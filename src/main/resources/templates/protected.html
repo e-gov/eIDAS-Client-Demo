@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>eIDAS Client Webapp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/bootstrap.min.js"/>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <div th:substituteby="index::header"></div>
+    </div>
+    <div th:substituteby="index::logout"></div>
+    <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+</div>
+</body>
+</html>
