@@ -35,7 +35,7 @@ public class EidasAuthenticationFilter extends AbstractAuthenticationProcessingF
             uri.queryParam("loa", ServletRequestUtils.getStringParameter(httpServletRequest, "loa"));
             uri.queryParam("relayState", ServletRequestUtils.getStringParameter(httpServletRequest, "relayState"));
 
-            HttpResponse response = Request.Post(uri.build().toUriString()).execute().returnResponse();
+            HttpResponse response = Request.Get(uri.build().toUriString()).execute().returnResponse();
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
                 throw new InternalAuthenticationServiceException("Web service returned an error. " + response.getStatusLine().getStatusCode());
             }
