@@ -4,6 +4,7 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Request;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class EidasAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -31,9 +34,10 @@ public class EidasAuthenticationFilter extends AbstractAuthenticationProcessingF
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
         try {
             UriComponentsBuilder uri = UriComponentsBuilder.fromUriString(externalService + "/login");
-            uri.queryParam("country", ServletRequestUtils.getStringParameter(httpServletRequest, "country"));
-            uri.queryParam("loa", ServletRequestUtils.getStringParameter(httpServletRequest, "loa"));
-            uri.queryParam("relayState", ServletRequestUtils.getStringParameter(httpServletRequest, "relayState"));
+            uri.queryParam("Country", ServletRequestUtils.getStringParameter(httpServletRequest, "country"));
+            uri.queryParam("LoA", ServletRequestUtils.getStringParameter(httpServletRequest, "loa"));
+            uri.queryParam("RelayState", ServletRequestUtils.getStringParameter(httpServletRequest, "relayState"));
+            uri.queryParam("AdditionalAttributes", URLEncoder.encode(ServletRequestUtils.getStringParameter(httpServletRequest, "additionalAttributes"), StandardCharsets.UTF_8.name()));
 
             HttpResponse response = Request.Get(uri.build().toUriString()).execute().returnResponse();
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {

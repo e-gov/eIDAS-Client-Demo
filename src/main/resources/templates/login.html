@@ -4,7 +4,13 @@
         <title>eIDAS Client Webapp</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <script src="js/popper.min.js"/>
         <script src="js/bootstrap.min.js"/>
+        <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        </script>
     </head>
     <body>
         <div class="container">
@@ -43,6 +49,12 @@
                             <label for="relayState" class="col-sm-2 col-form-label col-form-label-sm">Relay state</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" id="relayState" name="relayState" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="relayState" class="col-sm-2 col-form-label col-form-label-sm">Additional attributes</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" id="additionalAttributes" name="additionalAttributes" data-toggle="tooltip" data-placement="right" title="eIDAS-Client additional eIDAS attribute FriendlyName's separated by spaces (no url encoding)" />
                             </div>
                         </div>
                         <div class="form-group row">
